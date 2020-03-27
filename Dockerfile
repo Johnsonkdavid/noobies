@@ -1,13 +1,15 @@
-# use a node base image
-FROM node:7-onbuild
+# use a  python:3.8.2-alpine base image
+FROM  python:3.8.2-alpine
 
-# set maintainer
-LABEL maintainer "miiro@getintodevops.com"
+#set maintainer
+LABEL maintainer "johnsonkdavid"
 
-# set a health check
-HEALTHCHECK --interval=5s \
-            --timeout=5s \
-            CMD curl -f http://127.0.0.1:8000 || exit 1
+# Installing additional modules
+RUN pip3 install django \
+    && pip3 install gunicorn
+    
+#set Command
+CMD  ["python3"]
 
-# tell docker what port to expose
-EXPOSE 8000
+    
+    
